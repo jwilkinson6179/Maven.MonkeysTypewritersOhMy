@@ -31,6 +31,3 @@ After the sleep, print out the results of the unsafely copied passage.
 ### Part 2
 
 Finish the `SafeCopier` and then call that from the main method, in addition to the unsafe version.
-
-
-
