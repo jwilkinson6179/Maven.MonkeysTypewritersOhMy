@@ -29,12 +29,19 @@ public class MonkeyTypewriter {
         // A Tale Of Two Cities.
 
         Thread monkey;
+        Thread ape;
         UnsafeCopier copier = new UnsafeCopier(introduction);
+        SafeCopier safeCopier = new SafeCopier(introduction);
 
         for (Integer i = 0; i < 5; i++) {
             monkey = new Thread(copier);
             monkey.start();
         }
+        for (Integer i = 0; i < 5; i++) {
+            ape = new Thread(safeCopier);
+            ape.start();
+        }
+
 
         // This wait is here because main is still a thread and we want the main method to print the finished copies
         // after enough time has passed.
@@ -48,14 +55,22 @@ public class MonkeyTypewriter {
 
         System.out.printf("Unsafe copy: ");
         String copiedText = copier.copied;
-        Thread typewriter = new Thread(new TypingToScreen(copiedText));
+        String safeCopiedText = safeCopier.copied;
+
+        if (!safeCopiedText.equals(introduction + " ")) {
+            System.out.println("APE ERRORS");
+            System.out.println(safeCopiedText);
+        } else {
+            System.out.println("Ape Success!");
+//            System.out.println(safeCopiedText);
+        }
 
         if (!copiedText.equals(introduction + " ")) {
-            System.out.println("ERRORS");
-            typewriter.start();
+            System.out.println("MONKEY ERRORS");
+            System.out.println(copiedText);
         } else {
-            System.out.println("Success!");
-            typewriter.start();
+            System.out.println("Monkey Success!");
+//            System.out.println(copiedText);
         }
     }
 }

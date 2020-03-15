@@ -19,7 +19,7 @@ public class TypingToScreen implements Runnable
 
             try
             {
-                Thread.sleep(150);
+                Thread.sleep(50);
             } catch(InterruptedException e)
             {
                 System.out.println("SOMETHING WOKE ME UP");
