@@ -11,12 +11,15 @@ public class SafeCopier extends Copier
         super(toCopy);
     }
 
-    public synchronized void run()
+    public void run()
     {
-        while(stringIterator.hasNext())
+        synchronized (this)
         {
-            String word = stringIterator.next();
-            copied += word + " ";
+            while (stringIterator.hasNext())
+            {
+                String word = stringIterator.next();
+                copied += word + " ";
+            }
         }
     }
 }
