@@ -34,11 +34,11 @@ public class MonkeyTypewriter {
         SafeCopier safeCopier = new SafeCopier(introduction);
 
         for (Integer i = 0; i < 5; i++) {
-            monkey = new Thread(copier);
+            monkey = new Thread(copier, "Monkey #" + i);
             monkey.start();
         }
         for (Integer i = 0; i < 5; i++) {
-            ape = new Thread(safeCopier);
+            ape = new Thread(safeCopier,  "Ape #" + i);
             ape.start();
         }
 
