@@ -23,30 +23,24 @@ public class UnsafeCopier extends Copier
     {
         StringBuilder wordAdder = new StringBuilder();
         wordAdder.append(copied);
+        char[] wordAsChars;
+
         while(stringIterator.hasNext())
         {
-            LOGGER.log(INFO, Thread.currentThread().getName() + " is reading.");
+//            LOGGER.log(INFO, Thread.currentThread().getName() + " is reading.");
             String word = stringIterator.next();
+            wordAsChars = word.toCharArray();
             try {
                 Thread.currentThread().sleep(5 + rand.nextInt(15));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            char[] wordAsChars = word.toCharArray();
-
-
 
             for(Character letter : wordAsChars)
             {
                 wordAdder.append(letter);
-                try {
-                    Thread.currentThread().sleep(5 + rand.nextInt(5));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
             copied = wordAdder.append(" ").toString();
-//            copied += word + " ";
         }
     }
 }
