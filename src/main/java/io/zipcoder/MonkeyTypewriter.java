@@ -33,20 +33,25 @@ public class MonkeyTypewriter {
         UnsafeCopier copier = new UnsafeCopier(introduction);
         SafeCopier safeCopier = new SafeCopier(introduction);
 
+        ArrayList<Thread> monkeyPool = new ArrayList<>();
+        ArrayList<Thread> apePool = new ArrayList<>();
         for (Integer i = 0; i < 5; i++) {
             monkey = new Thread(copier, "Monkey #" + i);
-            monkey.start();
+            monkeyPool.add(monkey);
+            ape = new Thread(safeCopier,  "Ape #" + i);
+            apePool.add(ape);
         }
         for (Integer i = 0; i < 5; i++) {
-            ape = new Thread(safeCopier,  "Ape #" + i);
-            ape.start();
+
+            monkeyPool.get(i).start();
+            apePool.get(i).start();
         }
 
 
         // This wait is here because main is still a thread and we want the main method to print the finished copies
         // after enough time has passed.
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             System.out.println("MAIN INTERRUPTED");
         }
