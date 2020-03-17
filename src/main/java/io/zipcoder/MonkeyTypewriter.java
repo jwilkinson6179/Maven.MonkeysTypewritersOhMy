@@ -58,7 +58,6 @@ public class MonkeyTypewriter {
 
         // Print out the copied versions here.
 
-        System.out.printf("Unsafe copy: ");
         String copiedText = copier.copied;
         String safeCopiedText = safeCopier.copied;
 

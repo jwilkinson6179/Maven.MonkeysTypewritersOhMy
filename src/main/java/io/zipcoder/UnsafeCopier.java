@@ -21,6 +21,8 @@ public class UnsafeCopier extends Copier
 
     public void run()
     {
+        StringBuilder wordAdder = new StringBuilder();
+        wordAdder.append(copied);
         while(stringIterator.hasNext())
         {
             LOGGER.log(INFO, Thread.currentThread().getName() + " is reading.");
@@ -30,7 +32,21 @@ public class UnsafeCopier extends Copier
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            copied += word + " ";
+            char[] wordAsChars = word.toCharArray();
+
+
+
+            for(Character letter : wordAsChars)
+            {
+                wordAdder.append(letter);
+                try {
+                    Thread.currentThread().sleep(5 + rand.nextInt(5));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            copied = wordAdder.append(" ").toString();
+//            copied += word + " ";
         }
     }
 }
